@@ -8,19 +8,20 @@ namespace LogCollectorConsole
 {
     #region Ref
 
+
     /*Cryptography 
-    + Referent.log; (C:\Dipost\log\Referent)
+    + Referent.log; (C:\Dipost\log\Referent) #
     + ref_crypto_логин организации.log;(C:\Dipost\log\Referent)
     + CPCrypto.ini; (C:\Dipost)
-    + Referent0.ini; (C:\Dipost)
-    + referent.ini; (C:\Dipost)
+    + Referent0.ini; (C:\Dipost) #
+    + referent.ini; (C:\Dipost) #
     + Referent_Setup.ini (C:\Dipost)
     */
 
     /*Transport
-    + Referent.log; (C:\Dipost\log\Referent)
-    + Referent0.ini; (C:\Dipost)
-    + referent.ini; (C:\Dipost)
+    + Referent.log; (C:\Dipost\log\Referent) #
+    + Referent0.ini; (C:\Dipost) #
+    + referent.ini; (C:\Dipost) #
     + Referent_Setup.ini; (C:\Dipost)
     + Reftransport.log (C:\Dipost\log\Referent)
     + Protokol_ логин организации.log; (C:\Dipost\log\\Referent)
@@ -28,31 +29,31 @@ namespace LogCollectorConsole
     */
 
     /*Update
-    + Referent.log; (C:\Dipost\log\Referent)
-    + Referent0.ini; (C:\Dipost)
-    + referent.ini; (C:\Dipost)
+    + Referent.log; (C:\Dipost\log\Referent) #
+    + Referent0.ini; (C:\Dipost) #
+    + referent.ini; (C:\Dipost) #
     + Referent_Setup.ini; (C:\Dipost)
     + TXUpdater_ggggmmnnhhmmss.log (C:\Dipost) 
     */
 
     /*TaxControl
-    + Referent0.ini; (C:\Dipost)
-    + referent.ini; (C:\Dipost)
+    + Referent0.ini; (C:\Dipost) #
+    + referent.ini; (C:\Dipost) #
     + FormatCheck.log (C:\Dipost\log\FormatCheck)
-    + Referent.log; (C:\Dipost\log\Referent) 
+    + Referent.log; (C:\Dipost\log\Referent) # 
     */
 
     /*ImportInDB
-    * + Referent.log; (C:\Dipost\log\Referent)
-    + Referent0.ini; (C:\Dipost)
-    + referent.ini; (C:\Dipost)
-    + Referent_Setup.ini (C:\Dipost) 
+    * + Referent.log; (C:\Dipost\log\Referent) #
+    + Referent0.ini; (C:\Dipost) #
+    + referent.ini; (C:\Dipost) #
+    + Referent_Setup.ini (C:\Dipost) # 
      */
 
     /* PostProcessing/Visualization
-    + Referent.log; (C:\Dipost\log\Referent)
-    + Referent0.ini; (C:\Dipost)
-    + referent.ini; (C:\Dipost)
+    + Referent.log; (C:\Dipost\log\Referent) #
+    + Referent0.ini; (C:\Dipost) #
+    + referent.ini; (C:\Dipost) #
     + Referent_Setup.ini; (C:\Dipost)
     + FormatCheck.log; (С:\Dipost\log\FormatCheck)
     + DocEngineError.log; (C:\Dipost)
@@ -61,44 +62,44 @@ namespace LogCollectorConsole
     */
 
     /*DBUpdate
-    + Referent.log; (C:\Dipost\log\Referent)
-    + Referent0.ini; (C:\Dipost)
-    + referent.ini; (C:\Dipost)
+    + Referent.log; (C:\Dipost\log\Referent) #
+    + Referent0.ini; (C:\Dipost) #
+    + referent.ini; (C:\Dipost) #
     + Referent_Setup.ini; (C:\Dipost)
     + dover.fdb; (C:\Dipost\db)
     + DB\Backup. (C:\Dipost\db\backup)    
     */
 
     /*DBBreak
-    + Referent.log; (C:\Dipost\log\Referent)
-    + Referent0.ini; (C:\Dipost)
-    + referent.ini; (C:\Dipost)
+    + Referent.log; (C:\Dipost\log\Referent) #
+    + Referent0.ini; (C:\Dipost) #
+    + referent.ini; (C:\Dipost) #
     + Referent_Setup.ini; (C:\Dipost)
     + DB\Referent.~fN; (C:\Dipost\db)
     + DB\Backup. (C:\Dipost\db\backup)  
     */
 
     /*Connection
-    + Referent.log; (C:\Dipost\log\Referent)
-    + Referent0.ini; (C:\Dipost)    
-    + referent.ini; (C:\Dipost)
-    + Referent_Setup.ini; (C:\Dipost)
+    + Referent.log; (C:\Dipost\log\Referent) #
+    + Referent0.ini; (C:\Dipost) #
+    + referent.ini; (C:\Dipost) #
+    + Referent_Setup.ini; (C:\Dipost) # 
     + dbconnection.ini. (C:\Dipost) 
     */
 
     /*CirculationError
-    + Referent.log; (C:\Dipost\log\Referent)
+    + Referent.log; (C:\Dipost\log\Referent) #
     + ref_crypto_логин организации.log (C:\Dipost\log\Referent)
     + CPCrypto.ini; (C:\Dipost)
-    + Referent0.ini; (C:\Dipost)
-    + referent.ini; (C:\Dipost)
+    + Referent0.ini; (C:\Dipost) #
+    + referent.ini; (C:\Dipost) #
     + Referent_Setup.ini (C:\Dipost)  
     */
 
     /*Other
-    + Referent.log; (C:\Dipost\log\Referent)
-    + Referent0.ini; (C:\Dipost)
-    + referent.ini; (C:\Dipost)
+    + Referent.log; (C:\Dipost\log\Referent) #
+    + Referent0.ini; (C:\Dipost) #
+    + referent.ini; (C:\Dipost) #
     + Referent_Setup.ini. (C:\Dipost) 
     */
     #endregion
