@@ -8,8 +8,8 @@ namespace LogCollectorConsole
 {
     public abstract class LogFilesPaths
     {
-        protected ResourceSet _resSet;      
-
+        protected ResourceSet _resSet;
+        protected int _missCounter = default;
         protected List<string> _files = new List<string>();
         protected List<string> CheckFiles()
         {
@@ -24,6 +24,7 @@ namespace LogCollectorConsole
                 else
                 {
                     System.Console.WriteLine($@"Не обнаружен файл {filepath}");
+                    _missCounter++;
                 }
             }           
             return files;
@@ -32,6 +33,11 @@ namespace LogCollectorConsole
         public List<string> GetFiles()
         {
             return _files;
+        }
+
+        public int GetMissCounter()
+        {
+            return _missCounter;
         }
 
         protected List<string> SetFiles(ResourceSet resSet)

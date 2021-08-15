@@ -53,6 +53,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.IO.Compression.FileSystem" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -61,9 +62,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Collector.cs" />
     <Compile Include="CollectorManager.cs" />
     <Compile Include="LogFilesPaths.cs" />
     <Compile Include="Printer.cs" />
+    <Compile Include="RefCollectorCreator.cs" />
     <Compile Include="RefLogs.cs" />
     <Compile Include="RefResources\Other.Designer.cs">
       <AutoGen>True</AutoGen>

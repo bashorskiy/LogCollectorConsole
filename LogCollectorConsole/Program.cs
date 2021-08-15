@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LogCollectorConsole
 {
@@ -147,7 +143,8 @@ namespace LogCollectorConsole
     {
         static void Main(string[] args)
         {
-           
+            CollectorManager cm = new CollectorManager();
+            System.Console.ReadLine();
         }
     }
 }
