@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace LogCollectorConsole {
+namespace LogCollectorConsole.RefResources {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace LogCollectorConsole {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Paths {
+    internal class Other {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Paths() {
+        internal Other() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace LogCollectorConsole {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("LogCollectorConsole.Paths", typeof(Paths).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("LogCollectorConsole.RefResources.Other", typeof(Other).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -57,6 +57,42 @@ namespace LogCollectorConsole {
             }
             set {
                 resourceCulture = value;
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Referent0.ini.
+        /// </summary>
+        internal static string Ref0Ini {
+            get {
+                return ResourceManager.GetString("Ref0Ini", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на referent.ini.
+        /// </summary>
+        internal static string RefIni {
+            get {
+                return ResourceManager.GetString("RefIni", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на log\Referent\Referent.log.
+        /// </summary>
+        internal static string RefLog {
+            get {
+                return ResourceManager.GetString("RefLog", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Referent_Setup.ini.
+        /// </summary>
+        internal static string RefSetupIni {
+            get {
+                return ResourceManager.GetString("RefSetupIni", resourceCulture);
             }
         }
     }

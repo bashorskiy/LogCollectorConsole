@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -28,7 +29,7 @@ namespace LogCollectorConsole
     + FormatCheck.log (C:\Dipost\log\FormatCheck) 
     */
 
-    /*Update
+    /*UpdateError
     + Referent.log; (C:\Dipost\log\Referent) #
     + Referent0.ini; (C:\Dipost) #
     + referent.ini; (C:\Dipost) #
@@ -36,7 +37,7 @@ namespace LogCollectorConsole
     + TXUpdater_ggggmmnnhhmmss.log (C:\Dipost) 
     */
 
-    /*TaxControl
+    /*ReportControl
     + Referent0.ini; (C:\Dipost) #
     + referent.ini; (C:\Dipost) #
     + FormatCheck.log (C:\Dipost\log\FormatCheck)
@@ -49,6 +50,13 @@ namespace LogCollectorConsole
     + referent.ini; (C:\Dipost) #
     + Referent_Setup.ini (C:\Dipost) # 
      */
+
+    /*Other
+   + Referent.log; (C:\Dipost\log\Referent) #
+   + Referent0.ini; (C:\Dipost) #
+   + referent.ini; (C:\Dipost) #
+   + Referent_Setup.ini. (C:\Dipost) 
+   */
 
     /* PostProcessing/Visualization
     + Referent.log; (C:\Dipost\log\Referent) #
@@ -96,19 +104,14 @@ namespace LogCollectorConsole
     + Referent_Setup.ini (C:\Dipost)  
     */
 
-    /*Other
-    + Referent.log; (C:\Dipost\log\Referent) #
-    + Referent0.ini; (C:\Dipost) #
-    + referent.ini; (C:\Dipost) #
-    + Referent_Setup.ini. (C:\Dipost) 
-    */
+
     #endregion
 
     #region DoclinerSingle
 
     /*LaunchUpdateError
     +C:\Taxcom\Docliner Single\Client\log\ReferentNet.log 
-    +C:\Taxcom\DoclinerSingle\Server\RefNetUpdate\log\RefNetUpdate.log
+    +C:\Taxcom\Docliner Single\Server\RefNetUpdate\log\RefNetUpdate.log
     +C:\Taxcom\Docliner Single\Client\log\Launcher.log
     +C:\Taxcom\Docliner Single\Server\log\NativeUpdater\NativeUpdater.log
     +C:\Taxcom\Docliner Single\Server\log\RefNetService\RefNetService.log 
@@ -144,10 +147,7 @@ namespace LogCollectorConsole
     {
         static void Main(string[] args)
         {
-            /*
-             * 
-             */
-
+           
         }
     }
 }
