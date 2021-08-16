@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
+using System.Text;
 
 namespace LogCollectorConsole
 {
@@ -39,24 +41,24 @@ namespace LogCollectorConsole
 
             if (_logFiles.GetMissCounter() > 0)
             {
-                Printer.Warnings.MissFiles();              
+                Printer.Warnings.MissFiles();
             }
 
             if (_logFiles.GetFiles().Count == 0)
             {
-                Printer.Errors.MissAllFiles();                
+                Printer.Errors.MissAllFiles();
             }
             else if (!CheckSpace())
             {
                 Printer.Errors.NotEnoughSpace();
                 CopyToAnotherDisk();
             }
-            else 
+            else
             {
                 CopyToNewDirectory();
                 Archiving();
             }
-           
+
         }
         private void Archiving()
         {
@@ -75,23 +77,38 @@ namespace LogCollectorConsole
                             break;
                         }
                     case 2:
-                        {                            
+                        {
                             break;
                         }
                 }
             }
 
         }
-        private void CopyToNewDirectory() //TODO: Исправить обвал сложного пути
+        private void CopyToNewDirectory() 
         {
             Printer.Info.StartingCopy();
             string finalDir = CreateNewDirectory();
+
             foreach (var file in _logFiles.GetFiles())
             {
                 string startDir = Path.Combine(_startedDirectory, file);
                 string destDir = Path.Combine(finalDir, file);
+                if (!Directory.Exists(destDir))
+                {                                           
+                    string[] splittedStrings = destDir.Split('\\');
+                    StringBuilder sb = new StringBuilder();
+                    for (int i = 0; i < splittedStrings.Length-1; i++)
+                    {
+                        sb.Append(splittedStrings[i]);
+                        sb.Append('\\');
+                    }
+                    destDir = sb.ToString();
+                    Directory.CreateDirectory(destDir);
+                    destDir = Path.Combine(finalDir, file);
+                }
                 File.Copy(startDir, destDir, true);
             }
+
             _newDirectory = finalDir;
             Printer.Info.CopyFinish(finalDir);
         }
