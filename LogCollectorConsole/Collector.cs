@@ -6,7 +6,7 @@ namespace LogCollectorConsole
 {
     public abstract class Collector
     {
-        protected LogFilesPaths _paths;
+        protected LogFilesPaths _logFiles;
         protected string _newDirectory;
         protected string _startedDirectory;
         protected bool CheckSpace()
@@ -17,7 +17,7 @@ namespace LogCollectorConsole
             FileInfo info = default;
             long filesSize = default;
 
-            foreach (var path in _paths.GetFiles())
+            foreach (var path in _logFiles.GetFiles())
             {
                 info = new FileInfo(Path.Combine(Directory.GetCurrentDirectory(), path));
                 filesSize += info.Length;
@@ -36,27 +36,33 @@ namespace LogCollectorConsole
         }
         public void Collect()
         {
-            CheckSpace();
-            if (_paths.GetMissCounter() > 0)
+
+            if (_logFiles.GetMissCounter() > 0)
             {
-                Printer.Warnings.MissFiles();
+                Printer.Warnings.MissFiles();              
             }
-            if (!CheckSpace())
+
+            if (_logFiles.GetFiles().Count == 0)
+            {
+                Printer.Errors.MissAllFiles();                
+            }
+            else if (!CheckSpace())
             {
                 Printer.Errors.NotEnoughSpace();
-                CopyToAnotherDisk();                                
+                CopyToAnotherDisk();
             }
-            else
+            else 
             {
-                CopyToNewDirectory();               
+                CopyToNewDirectory();
+                Archiving();
             }
-            Archiving();
+           
         }
         private void Archiving()
         {
             Printer.Question.WantToArchive();
             bool isArchiving = int.TryParse(Console.ReadLine(), out int choice);
-            if (isArchiving&& choice>0 && choice <3)
+            if (isArchiving && choice > 0 && choice < 3)
             {
                 switch (choice)
                 {
@@ -65,22 +71,22 @@ namespace LogCollectorConsole
                             Printer.Info.StartingArchive();
                             string destPath = Path.Combine(Directory.GetCurrentDirectory(), "_IncidentLogs.zip");
                             ZipFile.CreateFromDirectory(_newDirectory, destPath);
-                            Printer.Info.ArchiveFinish(_newDirectory,destPath);
+                            Printer.Info.ArchiveFinish(_newDirectory, destPath);
                             break;
                         }
                     case 2:
-                        {
+                        {                            
                             break;
-                        }                   
+                        }
                 }
             }
-                     
+
         }
-        private void CopyToNewDirectory()
+        private void CopyToNewDirectory() //TODO: Исправить обвал сложного пути
         {
             Printer.Info.StartingCopy();
-            string finalDir = CreateNewDirectory();            
-            foreach (var file in _paths.GetFiles())
+            string finalDir = CreateNewDirectory();
+            foreach (var file in _logFiles.GetFiles())
             {
                 string startDir = Path.Combine(_startedDirectory, file);
                 string destDir = Path.Combine(finalDir, file);
@@ -106,7 +112,7 @@ namespace LogCollectorConsole
     {
         public RefCollector(LogFilesPaths paths)
         {
-            _paths = paths;
+            _logFiles = paths;
             Collect();
         }
     }

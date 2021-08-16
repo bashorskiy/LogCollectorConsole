@@ -36,6 +36,13 @@ namespace LogCollectorConsole
                        "Или в корневую папку Доклайнера (в ней должны быть папки Client, DB и Server) \n" +
                        "И перезапустите LogCollector");
             }
+            public static void MissAllFiles()
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("\n \n \t \t Не найдено ни одного файла! \n \n ");
+                Console.ResetColor();
+                Console.WriteLine( "Пожалуйста, соберите их вручную или переместите LogCollector в правильную директорию");
+            }
         }
         public class Warnings
         {

@@ -15,8 +15,8 @@ namespace LogCollectorConsole
         {
             List<string> files = new List<string>();
             foreach (var filepath in _files)
-            {
-                if (Directory.Exists(filepath))
+            {             
+                if (File.Exists(filepath))
                 {
                     System.Console.WriteLine($@"Найден файл {filepath}");
                     files.Add(filepath);
@@ -24,7 +24,7 @@ namespace LogCollectorConsole
                 else
                 {
                     System.Console.WriteLine($@"Не обнаружен файл {filepath}");
-                    _missCounter++;
+                    _missCounter++;                 
                 }
             }           
             return files;
@@ -54,7 +54,7 @@ namespace LogCollectorConsole
         protected void Intialize()
         {
             _files = SetFiles(_resSet);
-            CheckFiles();
+            _files = CheckFiles();
         }
 
         public virtual int GetChildrenCount()

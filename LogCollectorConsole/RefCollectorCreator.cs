@@ -4,7 +4,7 @@
     {
         public RefCollectorCreator(int key)
         {
-            LogFilesPaths paths = null;
+            LogFilesPaths paths = default;
             switch (key)
             {
                 case 1:

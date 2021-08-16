@@ -49,8 +49,7 @@ namespace LogCollectorConsole
                     Printer.Menu.PrintRefMenu();
                     bool isChoice = int.TryParse(Console.ReadLine(), out int key);
                     if (isChoice && key > 0 && key < reflogs.GetChildrenCount())
-                    {
-                        reflogs = null;
+                    {                       
                         RefCollectorCreator creator = new RefCollectorCreator(key);
                         break;
                     }
