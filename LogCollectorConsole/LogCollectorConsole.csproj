@@ -67,7 +67,6 @@
     <Compile Include="LogFilesPaths.cs" />
     <Compile Include="Printer.cs" />
     <Compile Include="RefCollectorCreator.cs" />
-    <Compile Include="RefLogs.cs" />
     <Compile Include="RefResources\Other.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

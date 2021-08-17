@@ -6,16 +6,15 @@ using System.Linq;
 
 namespace LogCollectorConsole
 {
-    public abstract class LogFilesPaths
+    public class LogFilesPaths
     {
-        protected ResourceSet _resSet;
         protected int _missCounter = default;
-        protected List<string> _files = new List<string>();
+        public List<string> Files { get; set; }
         protected List<string> CheckFiles()
         {
             List<string> files = new List<string>();
-            foreach (var filepath in _files)
-            {             
+            foreach (var filepath in Files)
+            {
                 if (File.Exists(filepath))
                 {
                     System.Console.WriteLine($@"Найден файл {filepath}");
@@ -24,47 +23,23 @@ namespace LogCollectorConsole
                 else
                 {
                     System.Console.WriteLine($@"Не обнаружен файл {filepath}");
-                    _missCounter++;                 
+                    _missCounter++;
                 }
-            }           
+            }
             return files;
         }
-
-        public List<string> GetFiles()
-        {
-            return _files;
-        }
-
+       
         public int GetMissCounter()
         {
             return _missCounter;
         }
-
-        protected List<string> SetFiles(ResourceSet resSet)
-        {
-            List<string> files = new List<string>();
-            foreach (DictionaryEntry entry in resSet)
-            {
-                object value = entry.Value;
-                files.Add(value.ToString());
-            }
-            return files;
-        }
-
+        
         protected void Intialize()
-        {
-            _files = SetFiles(_resSet);
-            _files = CheckFiles();
-        }
-
-        public virtual int GetChildrenCount()
-        {
-            System.Type thisType = GetType();
-            var allDerivedTypes = thisType.Assembly.ExportedTypes.Where(t => thisType.IsAssignableFrom(t));
-            return allDerivedTypes.Count();
-        }
+        {           
+            Files = CheckFiles();
+        }        
     }
 
-   
+
 
 }

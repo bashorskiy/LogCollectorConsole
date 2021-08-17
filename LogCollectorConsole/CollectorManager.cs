@@ -7,6 +7,7 @@ namespace LogCollectorConsole
     {
         private bool _isRef;
         private bool _isExist = true;
+        private int _casesCount = 4;
 
         public CollectorManager()
         {
@@ -42,15 +43,15 @@ namespace LogCollectorConsole
                 Console.ReadLine();
             }
             else if (_isRef)
-            {
-                RefLogs reflogs = new RefLogs();
+            {                
                 while (true)
                 {
+                    RefCollectorCreator creator = new RefCollectorCreator(key);
                     Printer.Menu.PrintRefMenu();
                     bool isChoice = int.TryParse(Console.ReadLine(), out int key);
-                    if (isChoice && key > 0 && key < reflogs.GetChildrenCount())
+                    if (isChoice && key > 0 && key <_casesCount)
                     {                       
-                        RefCollectorCreator creator = new RefCollectorCreator(key);
+                        
                         break;
                     }
                     else

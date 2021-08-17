@@ -19,7 +19,7 @@ namespace LogCollectorConsole
             FileInfo info = default;
             long filesSize = default;
 
-            foreach (var path in _logFiles.GetFiles())
+            foreach (var path in _logFiles.Files)
             {
                 info = new FileInfo(Path.Combine(Directory.GetCurrentDirectory(), path));
                 filesSize += info.Length;
@@ -36,27 +36,26 @@ namespace LogCollectorConsole
             }
             return isEnough;
         }
-        public void Collect()
+        public void Collect(LogFilesPaths paths)
         {
-
-            if (_logFiles.GetMissCounter() > 0)
+            if (paths.GetMissCounter() > 0)
             {
                 Printer.Warnings.MissFiles();
             }
-
-            if (_logFiles.GetFiles().Count == 0)
+            if (paths.Files.Count == 0)
             {
                 Printer.Errors.MissAllFiles();
-            }
+            }          
             else if (!CheckSpace())
             {
                 Printer.Errors.NotEnoughSpace();
+                _logFiles = paths;
                 CopyToAnotherDisk();
             }
             else
             {
-                CopyToNewDirectory();
-                Archiving();
+                _logFiles = paths;
+                CopyToNewDirectory();              
             }
 
         }
@@ -89,7 +88,7 @@ namespace LogCollectorConsole
             Printer.Info.StartingCopy();
             string finalDir = CreateNewDirectory();
 
-            foreach (var file in _logFiles.GetFiles())
+            foreach (var file in _logFiles.Files)
             {
                 string startDir = Path.Combine(_startedDirectory, file);
                 string destDir = Path.Combine(finalDir, file);
@@ -108,7 +107,6 @@ namespace LogCollectorConsole
                 }
                 File.Copy(startDir, destDir, true);
             }
-
             _newDirectory = finalDir;
             Printer.Info.CopyFinish(finalDir);
         }
@@ -116,6 +114,7 @@ namespace LogCollectorConsole
         {
 
         }
+
         private string CreateNewDirectory()
         {
             string finalDirectory = Path.Combine(Directory.GetCurrentDirectory(), "_IncedentLogs");
@@ -128,9 +127,8 @@ namespace LogCollectorConsole
     public class RefCollector : Collector
     {
         public RefCollector(LogFilesPaths paths)
-        {
-            _logFiles = paths;
-            Collect();
+        {           
+            Collect(paths);
         }
     }
 
