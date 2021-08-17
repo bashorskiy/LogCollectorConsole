@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
+using System.Collections;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.IO.Compression;
 using System.Text;
@@ -11,10 +14,19 @@ namespace LogCollectorConsole
         protected LogFilesPaths _logFiles;
         protected string _newDirectory;
         protected string _startedDirectory;
-        protected bool CheckSpace()
+
+        private string CreateUnicPath(string destPath)
+        {
+            destPath = PathSplit(destPath);
+            Random r = new Random();
+            string unic = r.Next().ToString();
+            destPath = Path.Combine(destPath, unic + "_IncidentLogs.zip");
+
+            return destPath;
+        }
+        private bool CheckSpace()
         {
             _startedDirectory = Directory.GetCurrentDirectory();
-            Console.WriteLine();
             bool isEnough = default;
             FileInfo info = default;
             long filesSize = default;
@@ -36,32 +48,50 @@ namespace LogCollectorConsole
             }
             return isEnough;
         }
-        public void Collect(LogFilesPaths paths)
+        private void CopyToAnotherDisk()
         {
-            if (paths.GetMissCounter() > 0)
+            Printer.Warnings.Sorry();
+            Console.ReadKey();
+        }
+        private void CopyToNewDirectory()
+        {
+            Printer.Info.StartingCopy();
+            string finalDir = CreateNewDirectory();
+            foreach (var file in _logFiles.Files)
             {
-                Printer.Warnings.MissFiles();
+                string startDir = Path.Combine(_startedDirectory, file);
+                string destDir = Path.Combine(finalDir, file);
+                if (!Directory.Exists(destDir))
+                {
+                    Directory.CreateDirectory(PathSplit(destDir));
+                    destDir = Path.Combine(finalDir, file);
+                }                
+                File.Copy(startDir, destDir, true);
             }
-            if (paths.Files.Count == 0)
+            _newDirectory = finalDir;
+            Printer.Info.CopyFinish(finalDir);
+        }
+        private string CreateNewDirectory()
+        {
+            string finalDirectory = Path.Combine(Directory.GetCurrentDirectory(), "_IncedentLogs");
+            DirectoryInfo di = new DirectoryInfo(finalDirectory);
+            di.Create();
+            return finalDirectory;
+        }
+        private string PathSplit(string destDir)
+        {
+            string[] splittedStrings = destDir.Split('\\');
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < splittedStrings.Length - 1; i++)
             {
-                Printer.Errors.MissAllFiles();
-            }          
-            else if (!CheckSpace())
-            {
-                Printer.Errors.NotEnoughSpace();
-                _logFiles = paths;
-                CopyToAnotherDisk();
+                sb.Append(splittedStrings[i]);
+                sb.Append('\\');
             }
-            else
-            {
-                _logFiles = paths;
-                CopyToNewDirectory();              
-            }
-
+            return sb.ToString();
         }
         private void Archiving()
         {
-            Printer.Question.WantToArchive();
+            Printer.Questions.WantToArchive();
             bool isArchiving = int.TryParse(Console.ReadLine(), out int choice);
             if (isArchiving && choice > 0 && choice < 3)
             {
@@ -71,6 +101,10 @@ namespace LogCollectorConsole
                         {
                             Printer.Info.StartingArchive();
                             string destPath = Path.Combine(Directory.GetCurrentDirectory(), "_IncidentLogs.zip");
+                            if (File.Exists(destPath))
+                            {
+                                destPath = CreateUnicPath(destPath);
+                            }
                             ZipFile.CreateFromDirectory(_newDirectory, destPath);
                             Printer.Info.ArchiveFinish(_newDirectory, destPath);
                             break;
@@ -82,52 +116,63 @@ namespace LogCollectorConsole
                 }
             }
 
-        }
-        private void CopyToNewDirectory() 
+        }      
+        private void DeleteNewDirectory()
         {
-            Printer.Info.StartingCopy();
-            string finalDir = CreateNewDirectory();
-
-            foreach (var file in _logFiles.Files)
+            Printer.Questions.WantToDelete();
+            bool isDeleting = int.TryParse(Console.ReadLine(), out int choice);
+            if (isDeleting && choice > 0 && choice < 3)
             {
-                string startDir = Path.Combine(_startedDirectory, file);
-                string destDir = Path.Combine(finalDir, file);
-                if (!Directory.Exists(destDir))
-                {                                           
-                    string[] splittedStrings = destDir.Split('\\');
-                    StringBuilder sb = new StringBuilder();
-                    for (int i = 0; i < splittedStrings.Length-1; i++)
-                    {
-                        sb.Append(splittedStrings[i]);
-                        sb.Append('\\');
-                    }
-                    destDir = sb.ToString();
-                    Directory.CreateDirectory(destDir);
-                    destDir = Path.Combine(finalDir, file);
+                switch (choice)
+                {
+                    case 1:
+                        {
+                            Printer.Info.StartingDelete();
+                            Directory.Delete(_newDirectory, true);
+                            Printer.Info.DeleteFinish(_newDirectory);
+                            break;
+                        }
+                    case 2:
+                        {
+                            break;
+                        }
                 }
-                File.Copy(startDir, destDir, true);
             }
-            _newDirectory = finalDir;
-            Printer.Info.CopyFinish(finalDir);
-        }
-        private void CopyToAnotherDisk()
-        {
 
         }
 
-        private string CreateNewDirectory()
+        public void Collect(LogFilesPaths paths)
         {
-            string finalDirectory = Path.Combine(Directory.GetCurrentDirectory(), "_IncedentLogs");
-            DirectoryInfo di = new DirectoryInfo(finalDirectory);
-            di.Create();
-            return finalDirectory;
+            _logFiles = paths;
+            if (paths.Files.Count == 0)
+            {
+                Printer.Errors.MissAllFiles();
+            }
+            else
+            {
+                if (paths.MissCounter > 0)
+                {
+                    Printer.Warnings.MissFiles();
+                }
+                if (!CheckSpace())
+                {
+                    Printer.Errors.NotEnoughSpace();
+                    CopyToAnotherDisk();
+                }
+                else
+                {
+                    CopyToNewDirectory();
+                }
+                Archiving();
+                DeleteNewDirectory();
+            }
         }
     }
 
     public class RefCollector : Collector
     {
         public RefCollector(LogFilesPaths paths)
-        {           
+        {
             Collect(paths);
         }
     }

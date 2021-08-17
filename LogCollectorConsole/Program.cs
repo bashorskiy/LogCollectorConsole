@@ -1,6 +1,4 @@
 ﻿
-using System.IO;
-
 namespace LogCollectorConsole
 {
     #region Ref
@@ -143,8 +141,9 @@ namespace LogCollectorConsole
     {
         static void Main(string[] args)
         {
-            CollectorManager cm = new CollectorManager();
-            System.Console.ReadLine();
+            new CollectorManager();
+            Printer.Info.ProgramFinish();
+            System.Console.ReadKey();
         }
     }
 }

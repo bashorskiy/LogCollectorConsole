@@ -31,10 +31,12 @@ namespace LogCollectorConsole
 
             public static void IncorrectPath()
             {
+                Console.ForegroundColor = ConsoleColor.DarkMagenta;
                 Console.WriteLine("Не найдена программа! \n" +
                        "Пожалуйста, переместите LogCollector в папку с Референтом (в ней должен быть файл Referent.exe) \n" +
                        "Или в корневую папку Доклайнера (в ней должны быть папки Client, DB и Server) \n" +
                        "И перезапустите LogCollector");
+                Console.ForegroundColor = ConsoleColor.Gray;
             }
             public static void MissAllFiles()
             {
@@ -48,42 +50,78 @@ namespace LogCollectorConsole
         {
             public static void MissFiles()
             {
-                Console.WriteLine("Предупреждение! \n " +
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.WriteLine("\n \n \t \t Предупреждение \n \n " +
                     "Не найдены некоторые файлы, необходимые для отдела аналитики! \n " +
                     "Пожалуйста, соберите их вручную или укажите это в описании инцидента.");
+                Console.ForegroundColor = ConsoleColor.Gray;
             }
-
+            public static void Sorry()
+            {
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.WriteLine("\n \n \t \t Предупреждение \n \n " +
+                    "К сожалению, данный функционал ещё не дописан. Ожидайте обновлений");
+                Console.ForegroundColor = ConsoleColor.Gray;
+            }
         }
 
         public class Info
         {
             public static void CheckSpace()
             {
-                Console.WriteLine("Проверяем наличие свободного места для копирования...");
+                Console.WriteLine("\n Проверяем наличие свободного места для копирования...");
             }
             public static void StartingCopy()
             {
-                Console.WriteLine("Начинаем процесс копирования. Логи будут скопированы в папку _IncidentLogs");
+                Console.WriteLine("\n Начинаем процесс копирования. Логи будут скопированы в папку _IncidentLogs");
+            }
+            public static void StartingDelete()
+            {
+                Console.WriteLine("\n Начинаем процесс удаления. Архив останется на месте.");
             }
             public static void StartingArchive()
             {
-                Console.WriteLine("Начинаем процесс архивации. Логи будут заархивированы в файл _IncidentLogs.zip");
+                Console.WriteLine("\n Начинаем процесс архивации. Логи будут заархивированы в файл _IncidentLogs.zip");
             }
             public static void CopyFinish(string destination)
             {
-                Console.WriteLine($"Завершено копирование файлов в {destination}");
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine($"\n \n Завершено копирование файлов в {destination} \n \n");
+                Console.ForegroundColor = ConsoleColor.Gray;
             }
             public static void ArchiveFinish (string source, string destination)
             {
-                Console.WriteLine($"Папка {source} успешно заархивирована в файл {destination}");
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine($"Папка {source} успешно \n заархивирована в файл {destination}");
+                Console.ForegroundColor = ConsoleColor.Gray;
+            }
+
+            public static void DeleteFinish(string source)
+            {
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine($"Папка {source} успешно удалена!");
+                Console.ForegroundColor = ConsoleColor.Gray;
+            }
+
+            public static void ProgramFinish()
+            {
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("Работа программы завершена. Нажмите любую клавишу для закрытия окна.");
+                Console.ForegroundColor = ConsoleColor.Gray;
             }
         }
 
-        public class Question
+        public class Questions
         {
             public static void WantToArchive()
             {
-                Console.WriteLine("Вы хотите заархивировать полученные логи?\n" +
+                Console.WriteLine("\n Вы хотите заархивировать полученные логи?\n" +
+                    "1. Да \n" +
+                    "2. Нет");
+            }
+            public static void WantToDelete()
+            {
+                Console.WriteLine("Вы хотите удалить исходную папку с собранными логами? (архив останется на месте)\n" +
                     "1. Да \n" +
                     "2. Нет");
             }

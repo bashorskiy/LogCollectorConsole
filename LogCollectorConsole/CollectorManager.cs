@@ -7,10 +7,11 @@ namespace LogCollectorConsole
     {
         private bool _isRef;
         private bool _isExist = true;
-        private int _casesCount = 4;
+        private const int _casesCount = 5;
 
         public CollectorManager()
         {
+            Console.ForegroundColor = ConsoleColor.Gray;
             CheckingProgram();
             DistributeObjects();
         }
@@ -42,16 +43,16 @@ namespace LogCollectorConsole
                 Printer.Errors.IncorrectPath();
                 Console.ReadLine();
             }
+
             else if (_isRef)
             {                
                 while (true)
-                {
-                    RefCollectorCreator creator = new RefCollectorCreator(key);
+                {                   
                     Printer.Menu.PrintRefMenu();
                     bool isChoice = int.TryParse(Console.ReadLine(), out int key);
                     if (isChoice && key > 0 && key <_casesCount)
-                    {                       
-                        
+                    {
+                        new RefCollectorCreator(key);
                         break;
                     }
                     else
@@ -62,11 +63,10 @@ namespace LogCollectorConsole
             }
             else if (!_isRef)
             {
-
+                Printer.Warnings.Sorry();
+                Console.ReadKey();
             }
         }
     }
-
-
-   
+  
 }

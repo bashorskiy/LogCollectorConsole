@@ -1,21 +1,20 @@
-﻿using System.Collections;
+﻿
 using System.Collections.Generic;
 using System.IO;
-using System.Resources;
-using System.Linq;
+
 
 namespace LogCollectorConsole
 {
     public class LogFilesPaths
     {
-        protected int _missCounter = default;
+        public int MissCounter { get; private set; }
         public List<string> Files { get; set; }
-        protected List<string> CheckFiles()
+        public void CheckFiles()
         {
             List<string> files = new List<string>();
             foreach (var filepath in Files)
             {
-                if (File.Exists(filepath))
+                if (File.Exists(filepath)||Directory.Exists(filepath))
                 {
                     System.Console.WriteLine($@"Найден файл {filepath}");
                     files.Add(filepath);
@@ -23,23 +22,10 @@ namespace LogCollectorConsole
                 else
                 {
                     System.Console.WriteLine($@"Не обнаружен файл {filepath}");
-                    _missCounter++;
+                    MissCounter++;
                 }
             }
-            return files;
-        }
-       
-        public int GetMissCounter()
-        {
-            return _missCounter;
-        }
-        
-        protected void Intialize()
-        {           
-            Files = CheckFiles();
-        }        
+            Files = files;
+        }     
     }
-
-
-
 }

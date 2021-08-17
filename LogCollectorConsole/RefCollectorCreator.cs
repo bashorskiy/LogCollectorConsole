@@ -12,7 +12,7 @@ namespace LogCollectorConsole
             {
                 {
                     //UpdateError
-                    1, new List<string> 
+                    1, new List<string>
                     {
                     "referent.ini",
                     "log\\Referent\\Referent.log",
@@ -23,7 +23,7 @@ namespace LogCollectorConsole
                 },
                 {
                     //ReportControl
-                    2, new List<string> 
+                    2, new List<string>
                     {
                     "log\\FormatCheck\\FormatCheck.log",
                     "Referent0.ini",
@@ -50,6 +50,17 @@ namespace LogCollectorConsole
                     "Referent_Setup.ini",
                     "Referent0.ini",
                     }
+                },
+                {
+                    //DatabaseConnection
+                    5, new List<string>
+                    {
+                    "referent.ini",
+                    "log\\Referent\\Referent.log",
+                    "Referent_Setup.ini",
+                    "Referent0.ini",
+                    "dbconnection.ini"
+                    }
                 }
             };
         }
@@ -60,20 +71,15 @@ namespace LogCollectorConsole
             return result;
         }
 
-
-
-
         public RefCollectorCreator(int key)
         {
             InitializePaths();
-            LogFilesPaths paths = default;
-            paths.Files = GetValue(key);
-            RefCollector refCollector = new RefCollector(paths);
-        }
-
-        public RefCollectorCreator()
-        {
-
+            LogFilesPaths paths = new LogFilesPaths
+            {
+                Files = GetValue(key)
+            };
+            paths.CheckFiles();
+            new RefCollector(paths);
         }
     }
 }
