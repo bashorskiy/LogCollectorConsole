@@ -10,34 +10,49 @@ namespace LogCollectorConsole
         public List<string> Files { get; set; }
         private void LoginCheck()
         {
-            if (Key > 5 && Key < 8)
-            {               
-                while (true)
+            while (true)
+            {
+                Printer.Info.EnterLogin();
+                string login = System.Console.ReadLine();
+                Files[0] = Files[0] + login + ".log";
+                if (!File.Exists(Files[0]))
                 {
-
-                    Printer.Info.EnterLogin();
-                    string login = System.Console.ReadLine();
-                    Files[0] = Files[0] + login + ".log";
-                    if (!File.Exists(Files[0]))
+                    Printer.Errors.IncorrectLogin();
+                    bool isChoice = int.TryParse(System.Console.ReadLine(), out int key);
+                    if (isChoice && key > 0 && key < 3)
                     {
-                        Printer.Errors.IncorrectLogin();
-                        bool isChoice = int.TryParse(System.Console.ReadLine(), out int key);
-                        if (isChoice && key > 0 && key < 3)
-                        {                           
-                            break;
-                        }
-                        else
-                        {
-                            continue;
-                        }                        
+                        break;
+                    }
+                    else
+                    {
+                        continue;
                     }
                 }
             }
+
+        }
+        private List<string> TildaFilesCheck()
+        {
+            List<string> tildaList = new List<string>();            
+            string tildaFile = "DB\\Referent.~f";
+            for (int i = 1; i < 4; i++)
+            {                
+                tildaList.Add(tildaFile+i);               
+            }
+            System.Console.WriteLine();           
+            return tildaList;
         }
         public void CheckFiles()
         {
             List<string> files = new List<string>();
-            LoginCheck();           
+            if (Key > 0 && Key < 5)
+            {
+                LoginCheck();
+            }
+            if (Key == 11)
+            {
+                files.AddRange(TildaFilesCheck());
+            }
             foreach (var filepath in Files)
             {
                 if (File.Exists(filepath) || Directory.Exists(filepath))

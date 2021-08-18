@@ -11,70 +11,135 @@ namespace LogCollectorConsole
             _cases = new Dictionary<int, List<string>>
             {
                 {
-                    //UpdateError
-                    1, new List<string>
+					//Криптография
+					1, new List<string>
                     {
-                    "referent.ini",
-                    "log\\Referent\\Referent.log",
-                    "Referent_Setup.ini",
-                    "Referent0.ini",
-                    "TXUpdater_ggggmmnnhhmmss.log"
+                        "log\\Referent\\ref_crypto_",
+                        "CPCrypto.ini",
+                        "referent.ini",
+                        "log\\Referent\\Referent.log",
+                        "Referent_Setup.ini",
+                        "Referent0.ini",
                     }
                 },
                 {
-                    //ReportControl
+                    //Транспорт писем
                     2, new List<string>
                     {
-                    "log\\FormatCheck\\FormatCheck.log",
-                    "Referent0.ini",
-                    "referent.ini",
-                    "log\\Referent\\Referent.log"
+                        "log\\Referent\\Protokol_",
+                        "log\\FormatCheck\\FormatCheck.log",
+                        "log\\Referent\\Reftransport.log",
+                        "referent.ini",
+                        "log\\Referent\\Referent.log",
+                        "Referent_Setup.ini",
+                        "Referent0.ini"
                     }
                 },
+
                 {
-                    //ImportInDB
+                    //Обработка писем/Визуализация ЭДО
                     3, new List<string>
                     {
-                    "referent.ini",
-                    "log\\Referent\\Referent.log",
-                    "Referent_Setup.ini",
-                    "Referent0.ini",
+                        "log\\Referent\\ref_crypto_",
+                        "referent.ini",
+                        "log\\Referent\\Referent.log",
+                        "Referent_Setup.ini",
+                        "Referent0.ini",
+                        "log\\FormatCheck\\FormatCheck.log",
+                        "CPCrypto.ini",
+                        "DocEngineError.log"
                     }
                 },
+
                 {
-                    //Other
+                    //Ошибки ЭДО
                     4, new List<string>
                     {
-                    "referent.ini",
-                    "log\\Referent\\Referent.log",
-                    "Referent_Setup.ini",
-                    "Referent0.ini",
+                        "referent.ini",
+                        "log\\Referent\\Referent.log",
+                        "Referent_Setup.ini",
+                        "Referent0.ini",
+                        "log\\Referent\\ref_crypto_",
+                        "CPCrypto.ini"
                     }
                 },
                 {
-                    //DatabaseConnection
-                    5, new List<string>
+					//Обновление
+					5, new List<string>
                     {
-                    "referent.ini",
-                    "log\\Referent\\Referent.log",
-                    "Referent_Setup.ini",
-                    "Referent0.ini",
-                    "dbconnection.ini"
+                        "referent.ini",
+                        "log\\Referent\\Referent.log",
+                        "Referent_Setup.ini",
+                        "Referent0.ini",
+                        "TXUpdater_ggggmmnnhhmmss.log"
                     }
                 },
                 {
-                    //Cryptography
-                    6, new List<string>
+					//Выходной контроль
+					6, new List<string>
                     {
-                    "log\\Referent\\ref_crypto_.log",
-                    "referent.ini",
-                    "log\\Referent\\Referent.log",
-                    "Referent_Setup.ini",
-                    "Referent0.ini",                    
-                    "CPCrypto.ini",                   
+                        "log\\FormatCheck\\FormatCheck.log",
+                        "Referent0.ini",
+                        "referent.ini",
+                        "log\\Referent\\Referent.log"
+                    }
+                },
+                {
+					//Импорт файлов в базу данных 
+					7, new List<string>
+                    {
+                        "referent.ini",
+                        "log\\Referent\\Referent.log",
+                        "Referent_Setup.ini",
+                        "Referent0.ini",
+                    }
+                },
+                {
+					//Остальные случаи
+					8, new List<string>
+                    {
+                        "referent.ini",
+                        "log\\Referent\\Referent.log",
+                        "Referent_Setup.ini",
+                        "Referent0.ini",
+                    }
+                },
+                {
+					//Подключение по сети
+					9, new List<string>
+                    {
+                        "referent.ini",
+                        "log\\Referent\\Referent.log",
+                        "Referent_Setup.ini",
+                        "Referent0.ini",
+                        "dbconnection.ini"
+                    }
+                },
+                {
+                    //Обновление базы данных 
+                    10, new List<string>
+                    {
+                        "referent.ini",
+                        "log\\Referent\\Referent.log",
+                        "Referent_Setup.ini",
+                        "Referent0.ini",
+                        "DB\\dover.fdb",
+                        "DB\\Backup"
+                    }
+                },
+                {
+                    11, new List<string>
+                    {                       
+                        "referent.ini",
+                        "log\\Referent\\Referent.log",
+                        "Referent_Setup.ini",
+                        "Referent0.ini",
+                        "DB\\Backup"
                     }
                 }
-                
+
+
+
             };
         }
 

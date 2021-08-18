@@ -60,8 +60,17 @@ namespace LogCollectorConsole
                 {
                     Directory.CreateDirectory(PathSplit(destDir));
                     destDir = Path.Combine(finalDir, file);
-                }                
-                File.Copy(startDir, destDir, true);
+                }
+                try
+                {
+                    File.Copy(startDir, destDir, true);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                    Directory.Move(startDir, destDir);
+                }
+               
             }
             _newDirectory = finalDir;
             Printer.Info.CopyFinish(finalDir);
