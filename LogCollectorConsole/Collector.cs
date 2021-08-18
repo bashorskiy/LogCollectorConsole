@@ -17,7 +17,6 @@ namespace LogCollectorConsole
             Random r = new Random();
             string unic = r.Next().ToString();
             destPath = Path.Combine(destPath, unic + "_IncidentLogs.zip");
-
             return destPath;
         }
         private bool CheckSpace()
@@ -97,7 +96,7 @@ namespace LogCollectorConsole
                         {
                             Printer.Info.StartingArchive();
                             string destPath = Path.Combine(Directory.GetCurrentDirectory(), "_IncidentLogs.zip");
-                            if (File.Exists(destPath))
+                            while (File.Exists(destPath))
                             {
                                 destPath = CreateUnicPath(destPath);
                             }

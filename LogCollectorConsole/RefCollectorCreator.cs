@@ -61,7 +61,20 @@ namespace LogCollectorConsole
                     "Referent0.ini",
                     "dbconnection.ini"
                     }
+                },
+                {
+                    //Cryptography
+                    6, new List<string>
+                    {
+                    "log\\Referent\\ref_crypto_.log",
+                    "referent.ini",
+                    "log\\Referent\\Referent.log",
+                    "Referent_Setup.ini",
+                    "Referent0.ini",                    
+                    "CPCrypto.ini",                   
+                    }
                 }
+                
             };
         }
 
@@ -76,7 +89,8 @@ namespace LogCollectorConsole
             InitializePaths();
             LogFilesPaths paths = new LogFilesPaths
             {
-                Files = GetValue(key)
+                Files = GetValue(key),
+                Key = key
             };
             paths.CheckFiles();
             new RefCollector(paths);

@@ -45,6 +45,13 @@ namespace LogCollectorConsole
                 Console.ResetColor();
                 Console.WriteLine( "Пожалуйста, соберите их вручную или переместите LogCollector в правильную директорию");
             }
+
+            public static void IncorrectLogin()
+            {
+                Console.WriteLine("Файл с таким логином не найден! Хотите продолжить или ввести логин заново?"+
+                    "1. Да \n" +
+                    "2. Нет");
+            }
         }
         public class Warnings
         {
@@ -67,6 +74,10 @@ namespace LogCollectorConsole
 
         public class Info
         {
+            public static void EnterLogin()
+            {
+                Console.WriteLine("Для данного случая необходимы логи с указанием логина клиента. Пожалуйста, введите логин до знака собаки (@)");
+            }
             public static void CheckSpace()
             {
                 Console.WriteLine("\n Проверяем наличие свободного места для копирования...");
