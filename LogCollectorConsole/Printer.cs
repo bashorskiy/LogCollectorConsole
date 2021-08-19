@@ -49,8 +49,8 @@ namespace LogCollectorConsole
             public static void IncorrectLogin()
             {
                 Console.WriteLine("Файл с таким логином не найден! Хотите продолжить или ввести логин заново?"+
-                    "1. Да \n" +
-                    "2. Нет");
+                    "1. Продолжить \n" +
+                    "2. Ввести логин заново");
             }
         }
         public class Warnings

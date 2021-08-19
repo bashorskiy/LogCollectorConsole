@@ -8,13 +8,14 @@ namespace LogCollectorConsole
         public int Key { get; set; }
         public int MissCounter { get; private set; }
         public List<string> Files { get; set; }
+
         private void LoginCheck()
         {
             while (true)
             {
                 Printer.Info.EnterLogin();
                 string login = System.Console.ReadLine();
-                Files[0] = Files[0] + login + ".log";
+                Files[0] = Path.Combine(Files[0], login, ".log");
                 if (!File.Exists(Files[0]))
                 {
                     Printer.Errors.IncorrectLogin();
@@ -33,13 +34,12 @@ namespace LogCollectorConsole
         }
         private List<string> TildaFilesCheck()
         {
-            List<string> tildaList = new List<string>();            
-            string tildaFile = "DB\\Referent.~f";
-            for (int i = 1; i < 4; i++)
-            {                
-                tildaList.Add(tildaFile+i);               
+            List<string> tildaList = new List<string>();
+            string tildaPath = Path.Combine(Directory.GetCurrentDirectory(), "DB");
+            if (Directory.Exists(tildaPath))
+            {
+                tildaList.AddRange(Directory.GetFiles(tildaPath, "Referent.~f*", SearchOption.AllDirectories));
             }
-            System.Console.WriteLine();           
             return tildaList;
         }
         public void CheckFiles()
@@ -55,10 +55,17 @@ namespace LogCollectorConsole
             }
             foreach (var filepath in Files)
             {
-                if (File.Exists(filepath) || Directory.Exists(filepath))
+                if (File.Exists(filepath) || Directory.Exists(Path.Combine(Directory.GetCurrentDirectory(),filepath)))
                 {
                     System.Console.WriteLine($@"Найден {filepath}");
-                    files.Add(filepath);
+                    if (filepath.Equals("DB\\Backup"))
+                    {
+                        files.AddRange(Directory.GetFiles(filepath));
+                    }
+                    else
+                    {
+                        files.Add(filepath);
+                    }
                 }
                 else
                 {

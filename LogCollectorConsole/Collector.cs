@@ -61,16 +61,7 @@ namespace LogCollectorConsole
                     Directory.CreateDirectory(PathSplit(destDir));
                     destDir = Path.Combine(finalDir, file);
                 }
-                try
-                {
-                    File.Copy(startDir, destDir, true);
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e.Message);
-                    Directory.Move(startDir, destDir);
-                }
-               
+                File.Copy(startDir, destDir, true);
             }
             _newDirectory = finalDir;
             Printer.Info.CopyFinish(finalDir);
@@ -120,7 +111,7 @@ namespace LogCollectorConsole
                 }
             }
 
-        }      
+        }
         private void DeleteNewDirectory()
         {
             Printer.Questions.WantToDelete();
