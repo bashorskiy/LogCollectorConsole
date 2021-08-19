@@ -78,8 +78,16 @@ namespace LogCollectorConsole
 	{
 		static void Main(string[] args)
 		{
-			new CollectorManager();
-			Printer.Info.ProgramFinish();
+			try
+			{
+				new CollectorManager();
+				Printer.Info.ProgramFinish();
+			}
+			catch (System.Exception e)
+			{
+				System.Console.WriteLine(e.Message);
+				System.Console.WriteLine(e.StackTrace);
+			}
 			System.Console.ReadKey();
 		}
 	}

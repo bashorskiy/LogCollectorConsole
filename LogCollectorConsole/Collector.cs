@@ -19,37 +19,72 @@ namespace LogCollectorConsole
             destPath = Path.Combine(destPath, unic + "_IncidentLogs.zip");
             return destPath;
         }
-        private bool CheckSpace()
-        {
-            _startedDirectory = Directory.GetCurrentDirectory();
-            bool isEnough = default;
-            FileInfo info = default;
-            long filesSize = default;
+        //private bool CheckSpace()
+        //{
+        //    
+        //    bool isEnough = default;
+        //    FileInfo info = default;
+        //    long filesSize = default;
 
-            foreach (var path in _logFiles.Files)
-            {
-                info = new FileInfo(Path.Combine(Directory.GetCurrentDirectory(), path));
-                filesSize += info.Length;
-            }
+        //    if (Directory.Exists(Path.Combine(_startedDirectory, "DB\\Backup")))
+        //    {
+        //        _logFiles.Files.Remove("DB\\Backup");
 
-            DriveInfo[] drives = DriveInfo.GetDrives();
-            foreach (var drive in drives)
-            {
-                if (Directory.GetDirectoryRoot(info.FullName).Equals(drive.Name))
-                {
-                    isEnough = filesSize < drive.AvailableFreeSpace;
-                    break;
-                }
-            }
-            return isEnough;
-        }
+        //        DirectoryInfo info1 = new DirectoryInfo("DB");
+        //        info1.
+        //    }
+        //    else
+        //    {
+        //        foreach (var path in _logFiles.Files)
+        //        {
+        //            info = new FileInfo(Path.Combine(Directory.GetCurrentDirectory(), path));
+        //            filesSize += info.Length;
+        //        }
+        //    }
+        //    DriveInfo[] drives = DriveInfo.GetDrives();
+        //    foreach (var drive in drives)
+        //    {
+        //        if (Directory.GetDirectoryRoot(info.FullName).Equals(drive.Name))
+        //        {
+        //            isEnough = filesSize < drive.AvailableFreeSpace;
+        //            break;
+        //        }
+        //    }
+        //    return isEnough;
+        //}
         private void CopyToAnotherDisk()
         {
             Printer.Warnings.Sorry();
             Console.ReadKey();
         }
+        private void BackupCopy(string sourceDirectory, string targetDirectory)
+        {
+            DirectoryInfo diSource = new DirectoryInfo(sourceDirectory);
+            DirectoryInfo diTarget = new DirectoryInfo(targetDirectory);
+
+            CopyAll(diSource, diTarget);
+        }
+
+        private void CopyAll(DirectoryInfo source, DirectoryInfo target)
+        {
+            Directory.CreateDirectory(target.FullName);
+            foreach (FileInfo fi in source.GetFiles())
+            {
+                fi.CopyTo(Path.Combine(target.FullName, fi.Name), true);
+            }
+
+            foreach (DirectoryInfo diSourceSubDir in source.GetDirectories())
+            {
+                DirectoryInfo nextTargetSubDir =
+                    target.CreateSubdirectory(diSourceSubDir.Name);
+                CopyAll(diSourceSubDir, nextTargetSubDir);
+            }
+        }
+
+
         private void CopyToNewDirectory()
         {
+           
             Printer.Info.StartingCopy();
             string finalDir = CreateNewDirectory();
             foreach (var file in _logFiles.Files)
@@ -61,7 +96,14 @@ namespace LogCollectorConsole
                     Directory.CreateDirectory(PathSplit(destDir));
                     destDir = Path.Combine(finalDir, file);
                 }
-                File.Copy(startDir, destDir, true);
+                if (file.Equals("DB\\Backup"))
+                {
+                    BackupCopy(startDir, destDir);
+                }
+                else
+                {
+                    File.Copy(startDir, destDir, true);
+                }
             }
             _newDirectory = finalDir;
             Printer.Info.CopyFinish(finalDir);
@@ -149,15 +191,7 @@ namespace LogCollectorConsole
                 {
                     Printer.Warnings.MissFiles();
                 }
-                if (!CheckSpace())
-                {
-                    Printer.Errors.NotEnoughSpace();
-                    CopyToAnotherDisk();
-                }
-                else
-                {
-                    CopyToNewDirectory();
-                }
+                CopyToNewDirectory();
                 Archiving();
                 DeleteNewDirectory();
             }
@@ -168,6 +202,7 @@ namespace LogCollectorConsole
     {
         public RefCollector(LogFilesPaths paths)
         {
+            _startedDirectory = Directory.GetCurrentDirectory();
             Collect(paths);
         }
     }

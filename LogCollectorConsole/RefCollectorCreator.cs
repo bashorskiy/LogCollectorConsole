@@ -128,6 +128,7 @@ namespace LogCollectorConsole
                     }
                 },
                 {
+                    //Ошибка базы данных
                     11, new List<string>
                     {                       
                         "referent.ini",
