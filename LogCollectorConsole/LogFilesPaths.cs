@@ -15,14 +15,25 @@ namespace LogCollectorConsole
             {
                 Printer.Info.EnterLogin();
                 string login = System.Console.ReadLine();
-                Files[0] = Path.Combine(Files[0], login, ".log");
+                Files[0] = Files[0]+login+".log";
                 if (!File.Exists(Files[0]))
                 {
                     Printer.Errors.IncorrectLogin();
                     bool isChoice = int.TryParse(System.Console.ReadLine(), out int key);
-                    if (isChoice && key > 0 && key < 3)
+                    if (isChoice)
                     {
-                        break;
+                        if (key == 1)
+                        {
+
+                        }           
+                        else if (key == 2)
+                        {
+
+                        }
+                        else
+                        {
+                            continue;
+                        }
                     }
                     else
                     {
