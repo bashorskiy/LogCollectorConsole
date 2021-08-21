@@ -55,8 +55,8 @@ namespace LogCollectorConsole
 
             public static void IncorrectLogin()
             {
-                Console.WriteLine("Файл с таким логином не найден! Хотите продолжить или ввести логин заново?"+
-                    "1. Продолжить \n" +
+                Console.WriteLine("Файл с таким логином не найден! Хотите продолжить или ввести логин заново?\n"+
+                    "1. Пропустить этот файл \n" +
                     "2. Ввести логин заново");
             }
         }
@@ -139,7 +139,7 @@ namespace LogCollectorConsole
             }
             public static void WantToDelete()
             {
-                Console.WriteLine("Вы хотите удалить исходную папку с собранными логами? (архив останется на месте)\n" +
+                Console.WriteLine("Вы хотите удалить исходную папку с собранными логами? (архив, если был создан, останется на месте)\n" +
                     "1. Да \n" +
                     "2. Нет");
             }

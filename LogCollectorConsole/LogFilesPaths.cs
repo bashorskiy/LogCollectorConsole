@@ -9,38 +9,40 @@ namespace LogCollectorConsole
         public int MissCounter { get; private set; }
         public List<string> Files { get; set; }
 
-        private void LoginCheck()
+        private void EnterLogin()
         {
-            while (true)
+            bool isCorrect = false;
+            while (!isCorrect)
             {
                 Printer.Info.EnterLogin();
                 string login = System.Console.ReadLine();
-                Files[0] = Files[0]+login+".log";
-                if (!File.Exists(Files[0]))
+                Files[0] = Files[0] + login + ".log";
+
+                isCorrect = IsLoginCorrect();
+            }
+        }
+
+        private bool IsLoginCorrect()
+        {
+            bool isCorrect = false;
+            if (!File.Exists(Files[0]))
+            {
+                Printer.Errors.IncorrectLogin();
+                bool isChoice = int.TryParse(System.Console.ReadLine(), out int key);
+                if (isChoice && key == 1)
                 {
-                    Printer.Errors.IncorrectLogin();
-                    bool isChoice = int.TryParse(System.Console.ReadLine(), out int key);
-                    if (isChoice)
-                    {
-                        if (key == 1)
-                        {
-
-                        }           
-                        else if (key == 2)
-                        {
-
-                        }
-                        else
-                        {
-                            continue;
-                        }
-                    }
-                    else
-                    {
-                        continue;
-                    }
+                    isCorrect = false;
+                }
+                if (isChoice && key == 2)
+                {
+                    isCorrect = true;
                 }
             }
+            else
+            {
+                isCorrect = true;
+            }
+            return isCorrect;
         }
 
         private List<string> TildaPathSplit(IEnumerable<string> tildaList)
@@ -48,17 +50,13 @@ namespace LogCollectorConsole
             List<string> list = new List<string>();
             foreach (var item in tildaList)
             {
-                string[] splittedStrings = item.Split('\\');
-                System.Text.StringBuilder sb = new System.Text.StringBuilder();
-                for (int i = splittedStrings.Length-2; i < splittedStrings.Length; i++)
+                string[] splittedStrings = item.Split('\\');               
+                string[] temp = new string[2];                
+                for (int i = 0; i < 2; i++)
                 {
-                    sb.Append(splittedStrings[i]);
-                    if (i != splittedStrings.Length -1)
-                    {
-                        sb.Append('\\');
-                    }
-                }
-                list.Add(sb.ToString());
+                    temp[i] = splittedStrings[splittedStrings.Length-2+i];                    
+                }               
+                list.Add(Path.Combine(temp));
             }
             return list;
         }
@@ -79,7 +77,7 @@ namespace LogCollectorConsole
             List<string> files = new List<string>();
             if (Key > 0 && Key < 5)
             {
-                LoginCheck();
+                EnterLogin();
             }
             if (Key == 11)
             {
@@ -89,15 +87,8 @@ namespace LogCollectorConsole
             {
                 if (File.Exists(filepath) || Directory.Exists(Path.Combine(Directory.GetCurrentDirectory(), filepath)))
                 {
-                    System.Console.WriteLine($@"Найден {filepath}");
-                    //if (filepath.Equals("DB\\Backup"))
-                    //{
-                    //    files.AddRange(Directory.GetFiles(filepath));
-                    //}
-                    //else
-                    //{
-                        files.Add(filepath);
-                   // }
+                    System.Console.WriteLine($@"Найден {filepath}");                    
+                    files.Add(filepath);
                 }
                 else
                 {

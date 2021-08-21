@@ -19,75 +19,34 @@ namespace LogCollectorConsole
             destPath = Path.Combine(destPath, unic + "_IncidentLogs.zip");
             return destPath;
         }
-        //private bool CheckSpace()
-        //{
-        //    
-        //    bool isEnough = default;
-        //    FileInfo info = default;
-        //    long filesSize = default;
-
-        //    if (Directory.Exists(Path.Combine(_startedDirectory, "DB\\Backup")))
-        //    {
-        //        _logFiles.Files.Remove("DB\\Backup");
-
-        //        DirectoryInfo info1 = new DirectoryInfo("DB");
-        //        info1.
-        //    }
-        //    else
-        //    {
-        //        foreach (var path in _logFiles.Files)
-        //        {
-        //            info = new FileInfo(Path.Combine(Directory.GetCurrentDirectory(), path));
-        //            filesSize += info.Length;
-        //        }
-        //    }
-        //    DriveInfo[] drives = DriveInfo.GetDrives();
-        //    foreach (var drive in drives)
-        //    {
-        //        if (Directory.GetDirectoryRoot(info.FullName).Equals(drive.Name))
-        //        {
-        //            isEnough = filesSize < drive.AvailableFreeSpace;
-        //            break;
-        //        }
-        //    }
-        //    return isEnough;
-        //}
-        private void CopyToAnotherDisk()
+        
+        private void BackupCopy(string sourceDirectory, string destDirectory)
         {
-            Printer.Warnings.Sorry();
-            Console.ReadKey();
-        }
-        private void BackupCopy(string sourceDirectory, string targetDirectory)
-        {
-            DirectoryInfo diSource = new DirectoryInfo(sourceDirectory);
-            DirectoryInfo diTarget = new DirectoryInfo(targetDirectory);
-
-            CopyAll(diSource, diTarget);
+            DirectoryInfo source = new DirectoryInfo(sourceDirectory);
+            DirectoryInfo dest = new DirectoryInfo(destDirectory);
+            CopyAll(source, dest);
         }
 
-        private void CopyAll(DirectoryInfo source, DirectoryInfo target)
+        private void CopyAll(DirectoryInfo source, DirectoryInfo dest)
         {
-            Directory.CreateDirectory(target.FullName);
+            Directory.CreateDirectory(dest.FullName);
             foreach (FileInfo fi in source.GetFiles())
             {
-                fi.CopyTo(Path.Combine(target.FullName, fi.Name), true);
+                fi.CopyTo(Path.Combine(dest.FullName, fi.Name), true);
             }
 
-            foreach (DirectoryInfo diSourceSubDir in source.GetDirectories())
+            foreach (DirectoryInfo sourceSubDirectory in source.GetDirectories())
             {
-                DirectoryInfo nextTargetSubDir =
-                    target.CreateSubdirectory(diSourceSubDir.Name);
-                CopyAll(diSourceSubDir, nextTargetSubDir);
+                DirectoryInfo nextDestSubDirectory = dest.CreateSubdirectory(sourceSubDirectory.Name);
+                CopyAll(sourceSubDirectory, nextDestSubDirectory);
             }
         }
-
 
         private void CopyToNewDirectory()
         {
-           
             Printer.Info.StartingCopy();
             string finalDir = CreateNewDirectory();
-            foreach (var file in _logFiles.Files)
+            foreach (string file in _logFiles.Files)
             {
                 string startDir = Path.Combine(_startedDirectory, file);
                 string destDir = Path.Combine(finalDir, file);
@@ -108,6 +67,7 @@ namespace LogCollectorConsole
             _newDirectory = finalDir;
             Printer.Info.CopyFinish(finalDir);
         }
+
         private string CreateNewDirectory()
         {
             string finalDirectory = Path.Combine(Directory.GetCurrentDirectory(), "_IncedentLogs");
@@ -115,6 +75,7 @@ namespace LogCollectorConsole
             di.Create();
             return finalDirectory;
         }
+
         private string PathSplit(string destDir)
         {
             string[] splittedStrings = destDir.Split('\\');
@@ -126,6 +87,7 @@ namespace LogCollectorConsole
             }
             return sb.ToString();
         }
+
         private void Archiving()
         {
             Printer.Questions.WantToArchive();
@@ -154,6 +116,7 @@ namespace LogCollectorConsole
             }
 
         }
+
         private void DeleteNewDirectory()
         {
             Printer.Questions.WantToDelete();
@@ -175,7 +138,6 @@ namespace LogCollectorConsole
                         }
                 }
             }
-
         }
 
         public void Collect(LogFilesPaths paths)
@@ -209,7 +171,6 @@ namespace LogCollectorConsole
 
     public class DocCollector : Collector
     {
-
 
     }
 }
