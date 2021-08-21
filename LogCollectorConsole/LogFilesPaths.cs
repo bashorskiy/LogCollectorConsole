@@ -15,17 +15,15 @@ namespace LogCollectorConsole
             while (!isCorrect)
             {
                 Printer.Info.EnterLogin();
-                string login = System.Console.ReadLine();
-                Files[0] = Files[0] + login + ".log";
-
-                isCorrect = IsLoginCorrect();
+                string login = System.Console.ReadLine();                
+                isCorrect = IsLoginCorrect(login);
             }
         }
 
-        private bool IsLoginCorrect()
+        private bool IsLoginCorrect(string login)
         {
             bool isCorrect = false;
-            if (!File.Exists(Files[0]))
+            if (!File.Exists(Files[0] + login + ".log"))
             {
                 Printer.Errors.IncorrectLogin();
                 bool isChoice = int.TryParse(System.Console.ReadLine(), out int key);
@@ -40,36 +38,61 @@ namespace LogCollectorConsole
             }
             else
             {
+                Files[0] = Files[0] + login + ".log";
                 isCorrect = true;
             }
             return isCorrect;
         }
 
-        private List<string> TildaPathSplit(IEnumerable<string> tildaList)
+        private List<string> PathSplit(IEnumerable<string> pathsList)
         {
+            //D:\Dipost\TXUpdater_ertert.log
+            //D:\Dipost\DB\Referemt.~f3
             List<string> list = new List<string>();
-            foreach (var item in tildaList)
+            foreach (var item in pathsList)
             {
-                string[] splittedStrings = item.Split('\\');               
-                string[] temp = new string[2];                
-                for (int i = 0; i < 2; i++)
+                string[] splittedStrings = item.Split('\\');
+                int counter = 0;
+                System.Text.StringBuilder sb = new System.Text.StringBuilder();
+                while (!sb.ToString().Equals(Directory.GetCurrentDirectory()+"\\"))
                 {
-                    temp[i] = splittedStrings[splittedStrings.Length-2+i];                    
-                }               
-                list.Add(Path.Combine(temp));
-            }
+                    sb.Append(splittedStrings[counter]);
+                    sb.Append("\\");
+                    counter++;
+                }
+                sb.Clear();
+                for (; counter < splittedStrings.Length; counter++)
+                {
+                    sb.Append(splittedStrings[counter]);
+                    if (counter!=splittedStrings.Length-1)
+                    {
+                        sb.Append("\\");
+                    }                   
+                }
+                list.Add(sb.ToString());
+            }           
+
+            //foreach (var item in tildaList)
+            //{
+            //    string[] splittedStrings = item.Split('\\');               
+            //    string[] temp = new string[2];                
+            //    for (int i = 0; i < 2; i++)
+            //    {
+            //        temp[i] = splittedStrings[splittedStrings.Length-2+i];                    
+            //    }               
+            //    list.Add(Path.Combine(temp));
+            //}
             return list;
         }
 
-        private List<string> TildaFilesCheck()
+        private List<string> FilesWithPatternCheck(string checkingPath, string pattern)
         {
-            List<string> tildaList = new List<string>();
-            string tildaPath = Path.Combine(Directory.GetCurrentDirectory(), "DB");
-            if (Directory.Exists(tildaPath))
+            List<string> formatList = new List<string>();           
+            if (Directory.Exists(checkingPath))
             {
-                tildaList.AddRange(TildaPathSplit(Directory.GetFiles(tildaPath, "Referent.~f*", SearchOption.AllDirectories)));
+                formatList.AddRange(PathSplit(Directory.GetFiles(checkingPath, pattern, SearchOption.AllDirectories)));
             }
-            return tildaList;
+            return formatList;
         }
 
         public void CheckFiles()
@@ -79,10 +102,15 @@ namespace LogCollectorConsole
             {
                 EnterLogin();
             }
-            if (Key == 11)
+            if (Key == 5)
             {
-                files.AddRange(TildaFilesCheck());
+                files.AddRange(FilesWithPatternCheck(Directory.GetCurrentDirectory(), "TXUpdater_*.log"));
             }
+            if (Key == 10)
+            {
+                files.AddRange(FilesWithPatternCheck(Path.Combine(Directory.GetCurrentDirectory(),"DB"),"Referent.~f*"));
+            }
+
             foreach (var filepath in Files)
             {
                 if (File.Exists(filepath) || Directory.Exists(Path.Combine(Directory.GetCurrentDirectory(), filepath)))
@@ -97,7 +125,7 @@ namespace LogCollectorConsole
                 }
             }
             Files = files;
-        }
+        }        
     }
 }
 

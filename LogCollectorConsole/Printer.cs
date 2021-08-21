@@ -17,10 +17,10 @@ namespace LogCollectorConsole
                     "5. Обновление\n" +
                     "6. Выходной контроль\n" +
                     "7. Импорт файлов в базу данных\n" +
-                    "8. Остальные случаи\n" +
-                    "9. Подключение по сети\n" +
-                    "10. Обновление базы данных\n" +
-                    "11. Ошибка базы данных\n");
+                    "8. Подключение по сети\n" +
+                    "9. Обновление базы данных\n" +
+                    "10. Ошибка базы данных\n" +
+                    "11. Остальные случаи\n");
             }
         }
 
@@ -29,13 +29,7 @@ namespace LogCollectorConsole
             public static void IncorrectChoice()
             {
                 Console.WriteLine("Такой пункт не предусмотрен.");
-            }
-
-            public static void NotEnoughSpace()
-            {
-                Console.WriteLine("Недостаточно места на данном диске для копирования!");
-            }
-
+            }         
             public static void IncorrectPath()
             {
                 Console.ForegroundColor = ConsoleColor.DarkMagenta;
@@ -50,14 +44,14 @@ namespace LogCollectorConsole
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("\n \n \t \t Не найдено ни одного файла! \n \n ");
                 Console.ResetColor();
-                Console.WriteLine( "Пожалуйста, соберите их вручную или переместите LogCollector в правильную директорию");
+                Console.WriteLine("Пожалуйста, соберите их вручную или переместите LogCollector в правильную директорию");
             }
 
             public static void IncorrectLogin()
             {
-                Console.WriteLine("Файл с таким логином не найден! Хотите продолжить или ввести логин заново?\n"+
-                    "1. Пропустить этот файл \n" +
-                    "2. Ввести логин заново");
+                Console.WriteLine("Файл с таким логином не найден! Хотите продолжить или ввести логин заново?\n" +
+                    "1. Ввести логин заново\n" +
+                    "2. Пропустить этот файл");
             }
         }
         public class Warnings
@@ -84,22 +78,18 @@ namespace LogCollectorConsole
             public static void EnterLogin()
             {
                 Console.WriteLine("Для данного случая необходимы логи с указанием логина клиента. Пожалуйста, введите логин до знака собаки (@)");
-            }
-            public static void CheckSpace()
-            {
-                Console.WriteLine("\n Проверяем наличие свободного места для копирования...");
-            }
+            }           
             public static void StartingCopy()
             {
                 Console.WriteLine("\n Начинаем процесс копирования. Логи будут скопированы в папку _IncidentLogs");
             }
             public static void StartingDelete()
             {
-                Console.WriteLine("\n Начинаем процесс удаления. Архив останется на месте.");
+                Console.WriteLine("\n Начинаем процесс удаления. Архив, если был создан, останется на месте.");
             }
             public static void StartingArchive()
             {
-                Console.WriteLine("\n Начинаем процесс архивации. Логи будут заархивированы в файл _IncidentLogs.zip");
+                Console.WriteLine("\n Начинаем процесс архивации. Логи будут заархивированы в файл *_IncidentLogs.zip");
             }
             public static void CopyFinish(string destination)
             {
@@ -107,7 +97,7 @@ namespace LogCollectorConsole
                 Console.WriteLine($"\n \n Завершено копирование файлов в {destination} \n \n");
                 Console.ForegroundColor = ConsoleColor.Gray;
             }
-            public static void ArchiveFinish (string source, string destination)
+            public static void ArchiveFinish(string source, string destination)
             {
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine($"Папка {source} успешно \n заархивирована в файл {destination}");
@@ -127,6 +117,28 @@ namespace LogCollectorConsole
                 Console.WriteLine("Работа программы завершена. Нажмите любую клавишу для закрытия окна.");
                 Console.ForegroundColor = ConsoleColor.Gray;
             }
+
+            public static void Credits()
+            {
+                Console.ForegroundColor = ConsoleColor.DarkYellow;
+                Console.Write("\n \n Если у вас есть предложения по доработке или добавлению нового функционала, пожалуйста,\n напишите письмо на");
+                Console.ForegroundColor = ConsoleColor.DarkBlue;
+                Console.Write(" BikinMV@taxcom.ru ");
+                Console.ForegroundColor = ConsoleColor.DarkYellow;
+                Console.WriteLine("я обязательно вам отвечу");
+                Console.ForegroundColor = ConsoleColor.DarkCyan;
+                Console.WriteLine("Разработано специально для компании Taxcom");
+            }
+
+            public static void ErrorEscalating()
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.Write("Возникло исключение! Пожалуйста, направьте скриншот с ошибкой и описанием действий на");
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                Console.Write(" BikinMV@taxcom.ru ");
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("если хотите, чтобы это было исправлено в следующем обновлении");
+            }
         }
 
         public class Questions
@@ -144,7 +156,5 @@ namespace LogCollectorConsole
                     "2. Нет");
             }
         }
-
-
     }
 }

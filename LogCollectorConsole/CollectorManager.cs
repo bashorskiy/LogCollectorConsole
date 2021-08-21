@@ -10,7 +10,7 @@ namespace LogCollectorConsole
         private const int _casesCount = 11;
 
         public CollectorManager()
-        {
+        {            
             Console.ForegroundColor = ConsoleColor.Gray;
             CheckingProgram();
             DistributeObjects();

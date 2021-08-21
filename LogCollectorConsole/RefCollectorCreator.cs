@@ -26,7 +26,7 @@ namespace LogCollectorConsole
                     //Транспорт писем
                     2, new List<string>
                     {
-                        "log\\Referent\\Protokol_",
+                        "log\\Referent\\protocol_",
                         "log\\FormatCheck\\FormatCheck.log",
                         "log\\Referent\\Reftransport.log",
                         "referent.ini",
@@ -55,11 +55,11 @@ namespace LogCollectorConsole
                     //Ошибки ЭДО
                     4, new List<string>
                     {
+                        "log\\Referent\\ref_crypto_",
                         "referent.ini",
                         "log\\Referent\\Referent.log",
                         "Referent_Setup.ini",
-                        "Referent0.ini",
-                        "log\\Referent\\ref_crypto_",
+                        "Referent0.ini",                       
                         "CPCrypto.ini"
                     }
                 },
@@ -70,8 +70,7 @@ namespace LogCollectorConsole
                         "referent.ini",
                         "log\\Referent\\Referent.log",
                         "Referent_Setup.ini",
-                        "Referent0.ini",
-                        "TXUpdater_ggggmmnnhhmmss.log"
+                        "Referent0.ini",                        
                     }
                 },
                 {
@@ -94,19 +93,10 @@ namespace LogCollectorConsole
                         "Referent0.ini",
                     }
                 },
-                {
-					//Остальные случаи
-					8, new List<string>
-                    {
-                        "referent.ini",
-                        "log\\Referent\\Referent.log",
-                        "Referent_Setup.ini",
-                        "Referent0.ini",
-                    }
-                },
+                
                 {
 					//Подключение по сети
-					9, new List<string>
+					8, new List<string>
                     {
                         "referent.ini",
                         "log\\Referent\\Referent.log",
@@ -117,7 +107,7 @@ namespace LogCollectorConsole
                 },
                 {
                     //Обновление базы данных 
-                    10, new List<string>
+                    9, new List<string>
                     {
                         "referent.ini",
                         "log\\Referent\\Referent.log",
@@ -129,13 +119,23 @@ namespace LogCollectorConsole
                 },
                 {
                     //Ошибка базы данных
-                    11, new List<string>
+                    10, new List<string>
                     {                       
                         "referent.ini",
                         "log\\Referent\\Referent.log",
                         "Referent_Setup.ini",
                         "Referent0.ini",
                         "DB\\Backup"
+                    }
+                },
+                {
+                    // Остальные случаи
+                    11, new List<string>
+                    {
+                        "referent.ini",
+                        "log\\Referent\\Referent.log",
+                        "Referent_Setup.ini",
+                        "Referent0.ini",
                     }
                 }
 

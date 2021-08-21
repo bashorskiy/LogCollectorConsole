@@ -80,13 +80,18 @@ namespace LogCollectorConsole
 		{
 			try
 			{
-				new CollectorManager();
-				Printer.Info.ProgramFinish();
+                //new CollectorManager();
+                Printer.Info.ProgramFinish();
+                System.Console.ReadKey();
+                Printer.Info.Credits();
+
+                System.Console.ReadKey();
 			}
 			catch (System.Exception e)
 			{
 				System.Console.WriteLine(e.Message);
 				System.Console.WriteLine(e.StackTrace);
+				Printer.Info.ErrorEscalating();
 			}
 			System.Console.ReadKey();
 		}

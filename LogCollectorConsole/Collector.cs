@@ -139,7 +139,7 @@ namespace LogCollectorConsole
                 }
             }
         }
-
+       
         public void Collect(LogFilesPaths paths)
         {
             _logFiles = paths;
@@ -165,6 +165,11 @@ namespace LogCollectorConsole
         public RefCollector(LogFilesPaths paths)
         {
             _startedDirectory = Directory.GetCurrentDirectory();
+            string path = Path.Combine(_startedDirectory, "_IncidentLogs");
+            if (Directory.Exists(path))
+            {
+                Directory.Delete(path, true);
+            }
             Collect(paths);
         }
     }
