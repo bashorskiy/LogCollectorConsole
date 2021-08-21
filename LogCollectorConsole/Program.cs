@@ -80,7 +80,7 @@ namespace LogCollectorConsole
 		{
 			try
 			{
-                //new CollectorManager();
+                new CollectorManager();
                 Printer.Info.ProgramFinish();
                 System.Console.ReadKey();
                 Printer.Info.Credits();
