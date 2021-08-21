@@ -123,7 +123,7 @@ namespace LogCollectorConsole
                 Console.ForegroundColor = ConsoleColor.DarkYellow;
                 Console.Write("\n \n Если у вас есть предложения по доработке или добавлению нового функционала, пожалуйста,\n напишите письмо на");
                 Console.ForegroundColor = ConsoleColor.Cyan;
-                Console.Write(" BikinMV@taxcom.ru ");
+                Console.Write(" BikinMV@taxcom.ru, ");
                 Console.ForegroundColor = ConsoleColor.DarkYellow;
                 Console.WriteLine("я обязательно вам отвечу");
                 Console.ForegroundColor = ConsoleColor.DarkCyan;
