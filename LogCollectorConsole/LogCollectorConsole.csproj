@@ -79,7 +79,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Collector.cs" />
+    <Compile Include="CollectorCreator.cs" />
     <Compile Include="CollectorManager.cs" />
+    <Compile Include="DocSingleCollectorCreator.cs" />
     <Compile Include="LogFilesPaths.cs" />
     <Compile Include="Printer.cs" />
     <Compile Include="RefCollectorCreator.cs" />

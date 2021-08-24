@@ -2,11 +2,9 @@
 
 namespace LogCollectorConsole
 {
-    public class RefCollectorCreator
+    public class RefCollectorCreator : CollectorCreator
     {
-        private Dictionary<int, List<string>> _cases;
-
-        private void InitializePaths()
+        protected override void InitializePaths()
         {
             _cases = new Dictionary<int, List<string>>
             {
@@ -140,9 +138,9 @@ namespace LogCollectorConsole
                 }
 
             };
-        }
+        }       
 
-        private List<string> GetValue(int key)
+        protected override List<string> GetValue(int key)
         {
             _cases.TryGetValue(key, out List<string> result);
             return result;

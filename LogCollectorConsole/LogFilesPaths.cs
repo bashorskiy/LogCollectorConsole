@@ -45,9 +45,7 @@ namespace LogCollectorConsole
         }
 
         private List<string> PathSplit(IEnumerable<string> pathsList)
-        {
-            //D:\Dipost\TXUpdater_ertert.log
-            //D:\Dipost\DB\Referemt.~f3
+        {           
             List<string> list = new List<string>();
             foreach (var item in pathsList)
             {
@@ -70,18 +68,7 @@ namespace LogCollectorConsole
                     }                   
                 }
                 list.Add(sb.ToString());
-            }           
-
-            //foreach (var item in tildaList)
-            //{
-            //    string[] splittedStrings = item.Split('\\');               
-            //    string[] temp = new string[2];                
-            //    for (int i = 0; i < 2; i++)
-            //    {
-            //        temp[i] = splittedStrings[splittedStrings.Length-2+i];                    
-            //    }               
-            //    list.Add(Path.Combine(temp));
-            //}
+            }                       
             return list;
         }
 

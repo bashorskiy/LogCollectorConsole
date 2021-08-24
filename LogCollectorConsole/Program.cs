@@ -1,18 +1,18 @@
 ﻿
 namespace LogCollectorConsole
 {
-	#region Ref
+    #region Ref
 
-	/*
+    /*
 	 
 
     Обновление базы данных 
 
     Поломка базы данных     
 
-	 */	
-	
-	/*DBUpdate
+	 */
+
+    /*DBUpdate
 	+ Referent.log; (C:\Dipost\log\Referent) #
 	+ Referent0.ini; (C:\Dipost) #
 	+ referent.ini; (C:\Dipost) #
@@ -21,7 +21,7 @@ namespace LogCollectorConsole
 	+ DB\Backup. (C:\Dipost\db\backup)    
 	*/
 
-	/*DBBreak
+    /*DBBreak
 	+ Referent.log; (C:\Dipost\log\Referent) #
 	+ Referent0.ini; (C:\Dipost) #
 	+ referent.ini; (C:\Dipost) #
@@ -30,17 +30,17 @@ namespace LogCollectorConsole
 	+ DB\Backup. (C:\Dipost\db\backup)  
 	*/
 
-	
 
-	
 
-	
 
-	#endregion
 
-	#region DoclinerSingle
 
-	/*LaunchUpdateError
+
+    #endregion
+
+    #region DoclinerSingle
+
+    /*LaunchUpdateError
 	+C:\Taxcom\Docliner Single\Client\log\ReferentNet.log 
 	+C:\Taxcom\Docliner Single\Server\RefNetUpdate\log\RefNetUpdate.log
 	+C:\Taxcom\Docliner Single\Client\log\Launcher.log
@@ -48,7 +48,7 @@ namespace LogCollectorConsole
 	+C:\Taxcom\Docliner Single\Server\log\RefNetService\RefNetService.log 
 	*/
 
-	/*SendRecieveError 
+    /*SendRecieveError 
 	+ C:\Taxcom\Docliner Single\Client\log\ReferentNet.log 
 	+ C:\Taxcom\Docliner Single\Client\log\TISLoader\TISLoader.log
 	+ C:\Taxcom\Docliner Single\Server\log\CPCrypto\CPCrypto.log
@@ -56,25 +56,25 @@ namespace LogCollectorConsole
 	+ C:\Taxcom\Docliner Single\Server\log\UnifiedFormat\UnifiedFormat.log 
 	*/
 
-	/*Import
+    /*Import
 	+ C:\Taxcom\Docliner Single\Client\log\ReferentNet.log 
 	+ C:\Taxcom\Docliner Single\Client\log\FormatCheck\FormatCheck.log     
 	*/
 
-	/*DocCheck
+    /*DocCheck
 	+C:\Taxcom\Docliner\Server\log\FormatCheck\FormatCheck.log
 	+ C:\Taxcom\Docliner\Client\log\adm\Docliner.log
 	+ C:\Taxcom\Docliner\Client\log\Пользователь \FormatCheck\FormatCheck.log
 	+ C:\Taxcom\Docliner\Server\log\CPCrypto\CPCrypto.log 
 	*/
 
-	/*Other
+    /*Other
 	+ Вся папка C:\Taxcom\Docliner Single\Client\log
 	+ Вся папка C:\Taxcom\Docliner Single\Server\log 
 	*/
 
-	#endregion
-	class Program
+    #endregion
+    class Program
 	{
 		static void Main(string[] args)
 		{
@@ -83,9 +83,7 @@ namespace LogCollectorConsole
                 new CollectorManager();
                 Printer.Info.ProgramFinish();
                 System.Console.ReadKey();
-                Printer.Info.Credits();
-
-                System.Console.ReadKey();
+                Printer.Info.Credits();                
 			}
 			catch (System.Exception e)
 			{
