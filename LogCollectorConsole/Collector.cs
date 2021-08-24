@@ -114,7 +114,6 @@ namespace LogCollectorConsole
                         }
                 }
             }
-
         }
 
         private void DeleteNewDirectory()

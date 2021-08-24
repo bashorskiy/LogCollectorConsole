@@ -43,7 +43,6 @@ namespace LogCollectorConsole
                 Printer.Errors.IncorrectPath();
                 Console.ReadLine();
             }
-
             else if (_isRef)
             {                
                 while (true)
