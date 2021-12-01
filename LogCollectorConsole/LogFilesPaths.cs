@@ -5,6 +5,7 @@ namespace LogCollectorConsole
 {
     public class LogFilesPaths
     {
+        public int DepKey { get; set; }
         public int Key { get; set; }
         public int MissCounter { get; private set; }
         public List<string> Files { get; set; }
@@ -38,8 +39,16 @@ namespace LogCollectorConsole
             }
             else
             {
-                Files[0] = Files[0] + login + ".log";
-                isCorrect = true;
+                if (DepKey == 1)
+                {
+                    Files[0] = Files[0] + login + ".log";
+                    isCorrect = true;
+                }
+                if (DepKey == 2)
+                {
+                    Files[0] = Files[0] + login + ".log";
+
+                }
             }
             return isCorrect;
         }

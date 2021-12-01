@@ -11,7 +11,7 @@ namespace LogCollectorConsole
         private const int _casesCount = 11;
 
         public CollectorManager()
-        {            
+        {
             Console.ForegroundColor = ConsoleColor.Gray;
             CheckingProgram();
             _departmentKey = ChoosingOption();
@@ -40,18 +40,19 @@ namespace LogCollectorConsole
 
         private int ChoosingOption()
         {
-            Printer.Menu.ChoosingDepartment();
-            bool isChoice = int.TryParse(Console.ReadLine(), out int key);
-            if (isChoice && key > 0 && key <= 2)
-            {
-                return key;
+            while (true)
+            { 
+                Printer.Menu.ChoosingDepartment();
+                bool isChoice = int.TryParse(Console.ReadLine(), out int key);
+                if (isChoice && key > 0 && key <= 2)
+                {
+                    return key;                    
+                }
+                else
+                {
+                    Printer.Errors.IncorrectChoice();                   
+                }
             }
-            else
-            {
-                Printer.Errors.IncorrectChoice();
-                return 0;
-            }
-
         }
 
         private void DistributeObjects()
@@ -62,12 +63,12 @@ namespace LogCollectorConsole
                 Console.ReadLine();
             }
             else if (_isRef)
-            {                
+            {
                 while (true)
-                {                   
+                {
                     Printer.Menu.PrintRefMenu();
                     bool isChoice = int.TryParse(Console.ReadLine(), out int key);
-                    if (isChoice && key > 0 && key <=_casesCount)
+                    if (isChoice && key > 0 && key <= _casesCount)
                     {
                         new RefCollectorCreator(key, _departmentKey);
                         break;
@@ -85,5 +86,5 @@ namespace LogCollectorConsole
             }
         }
     }
-  
+
 }
