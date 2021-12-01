@@ -148,7 +148,7 @@ namespace LogCollectorConsole
             return result;
         }
 
-        public RefCollectorCreator(int key)
+        public RefCollectorCreator(int key, int depKey)
         {
             InitializePaths();
             LogFilesPaths paths = new LogFilesPaths

@@ -6,6 +6,12 @@ namespace LogCollectorConsole
     {
         public class Menu
         {
+            public static void ChoosingDepartment()
+            {
+                Console.WriteLine("\n\t Выберите режим работы программы: \n" +
+                    "1. КЦ \n" +
+                    "2. ГРИ \n");
+            }
             public static void PrintRefMenu()
             {
                 Console.WriteLine("\n\t\t Логи для Референта \n" +
