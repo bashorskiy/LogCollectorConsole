@@ -6,8 +6,7 @@ using System.Text;
 namespace LogCollectorConsole
 {
     public class RefCollector
-    {
-        protected LogFilesPaths _logFiles;
+    {      
         protected string _newDirectory;
         protected string _startedDirectory;
 
