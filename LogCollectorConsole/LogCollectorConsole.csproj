@@ -78,13 +78,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Collector.cs" />
-    <Compile Include="CollectorManager.cs" />
-    <Compile Include="LogFilesPaths.cs" />
+    <Compile Include="CaseProcessor.cs" />
+    <Compile Include="OAIKPOTaskCase.cs" />
+    <Compile Include="CaseDTO.cs" />
+    <Compile Include="CaseFactory.cs" />
+    <Compile Include="PatternsPaths.cs" />
+    <Compile Include="RefCollector.cs" />
     <Compile Include="Printer.cs" />
-    <Compile Include="RefCollectorCreator.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StaticPaths.cs" />
+    <Compile Include="VariablePaths.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

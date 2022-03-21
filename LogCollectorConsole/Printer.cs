@@ -6,12 +6,6 @@ namespace LogCollectorConsole
     {
         public class Menu
         {
-            public static void ChoosingDepartment()
-            {
-                Console.WriteLine("\n\t Выберите режим работы программы: \n" +
-                    "1. КЦ \n" +
-                    "2. ГРИ \n");
-            }
             public static void PrintRefMenu()
             {
                 Console.WriteLine("\n\t\t Логи для Референта \n" +
@@ -66,8 +60,8 @@ namespace LogCollectorConsole
             {
                 Console.ForegroundColor = ConsoleColor.Yellow;
                 Console.WriteLine("\n \n \t \t Предупреждение \n \n " +
-                    "Не найдены некоторые файлы, необходимые для отдела аналитики! \n " +
-                    "Пожалуйста, соберите их вручную или укажите это в описании инцидента.");
+                    "Не найдены некоторые файлы, необходимые для задачи \n " +
+                    "Пожалуйста, соберите их вручную или укажите это в описании");
                 Console.ForegroundColor = ConsoleColor.Gray;
             }
             public static void Sorry()

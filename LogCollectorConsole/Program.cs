@@ -7,7 +7,7 @@ namespace LogCollectorConsole
 		{
 			try
 			{
-                new CollectorManager();
+                
                 Printer.Info.ProgramFinish();
                 System.Console.ReadKey();
                 Printer.Info.Credits();
@@ -21,4 +21,6 @@ namespace LogCollectorConsole
 			System.Console.ReadKey();
 		}
 	}
+
+	
 }

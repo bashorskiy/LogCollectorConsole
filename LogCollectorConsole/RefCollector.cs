@@ -5,7 +5,7 @@ using System.Text;
 
 namespace LogCollectorConsole
 {
-    public abstract class Collector
+    public class RefCollector
     {
         protected LogFilesPaths _logFiles;
         protected string _newDirectory;
@@ -19,7 +19,7 @@ namespace LogCollectorConsole
             destPath = Path.Combine(destPath, unic + "_IncidentLogs.zip");
             return destPath;
         }
-        
+
         private void BackupCopy(string sourceDirectory, string destDirectory)
         {
             DirectoryInfo source = new DirectoryInfo(sourceDirectory);
@@ -138,43 +138,21 @@ namespace LogCollectorConsole
                 }
             }
         }
-       
-        public void Collect(LogFilesPaths paths)
-        {
-            _logFiles = paths;
-            if (paths.Files.Count == 0)
-            {
-                Printer.Errors.MissAllFiles();
-            }
-            else
-            {
-                if (paths.MissCounter > 0)
-                {
-                    Printer.Warnings.MissFiles();
-                }
-                CopyToNewDirectory();
-                Archiving();
-                DeleteNewDirectory();
-            }
-        }
-    }
 
-    public class RefCollector : Collector
-    {
-        public RefCollector(LogFilesPaths paths)
+        public void Collect()
+        {
+                       
+        }
+
+        public RefCollector()
         {
             _startedDirectory = Directory.GetCurrentDirectory();
             string path = Path.Combine(_startedDirectory, "_IncidentLogs");
             if (Directory.Exists(path))
             {
                 Directory.Delete(path, true);
-            }
-            Collect(paths);
+            }           
         }
-    }
-
-    public class DocCollector : Collector
-    {
 
     }
 }
